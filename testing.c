@@ -60,6 +60,7 @@ int delete(node** head, int index){
             return 0;
         }
         temp = temp -> next;
+        count++;
     }
     printf(RED "\n ERROR: INDEX OUT OF RANGE \n" RESET);
     return -1;
@@ -78,7 +79,7 @@ int reversal(node** head){
     return 0;
 }
 
-int main(){
+int singlyLinkedList(){
     printf("---Welcome to Linked List Program---\n");
     node* head;
     head = createNode();
@@ -90,9 +91,13 @@ int main(){
     insert(head,3,2);
     printArr(head);
     insert(head,4,3);
-    // printArr(head);
-    // delete(&head,0);
+    printArr(head);
+    delete(&head,3);
     printArr(head);
     reversal(&head);
     printArr(head);
+    return 0;
+}
+int main(){
+    singlyLinkedList();
 }
