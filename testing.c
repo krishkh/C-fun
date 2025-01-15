@@ -65,6 +65,18 @@ int delete(node** head, int index){
     return -1;
 }
 
+int reversal(node** head){
+    node *top = *head;
+    node *prev = NULL;
+    while (top != NULL){
+        node* temp = top -> next;
+        top -> next = prev;
+        prev = top;
+        top = temp;
+    }
+    *head = prev;
+    return 0;
+}
 
 int main(){
     printf("---Welcome to Linked List Program---\n");
@@ -78,7 +90,9 @@ int main(){
     insert(head,3,2);
     printArr(head);
     insert(head,4,3);
+    // printArr(head);
+    // delete(&head,0);
     printArr(head);
-    delete(&head,0);
+    reversal(&head);
     printArr(head);
 }
