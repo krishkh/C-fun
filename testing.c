@@ -10,6 +10,18 @@ typedef struct node{
     int data;
 } node;
 
+typedef struct dNode{
+    struct dNode* prev;
+    struct dNode* next;
+    int data;
+}
+
+typedef struct list{
+    node* head;
+    int size;
+    // other meta data
+}list
+
 node* createNode(){
     node* temp = (node*)malloc(sizeof(node));
     temp -> next = NULL;
@@ -98,6 +110,9 @@ int singlyLinkedList(){
     printArr(head);
     return 0;
 }
+
+
+
 int main(){
     singlyLinkedList();
 }
