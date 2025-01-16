@@ -3,14 +3,14 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g
 
 # Target executable
-TARGET = testing
+TARGET = a
 
 # Default rule
 all: $(TARGET)
 
 # Build rule
-$(TARGET): testing.c
-	$(CC) $(CFLAGS) -o $(TARGET) testing.c
+$(TARGET): polynomial.c
+	$(CC) $(CFLAGS) -o $(TARGET) polynomial.c
 
 # OS-specific commands
 ifeq ($(OS),Windows_NT)

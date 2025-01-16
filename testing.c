@@ -14,13 +14,13 @@ typedef struct dNode{
     struct dNode* prev;
     struct dNode* next;
     int data;
-}
+} dNode;
 
 typedef struct list{
     node* head;
     int size;
     // other meta data
-}list
+}list;
 
 node* createNode(){
     node* temp = (node*)malloc(sizeof(node));
