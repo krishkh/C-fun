@@ -4,6 +4,7 @@
 typedef struct node{
     struct node* next;
     int coefficient;
+    int power;
 } node;
 
 node * createVar(int coefficient){
@@ -25,12 +26,12 @@ node* addEqn(node* eqn1, node* eqn2){
     node* temp1 = eqn1;
     node* temp2 = eqn2;
     node* head = createVar(0);
-    while(temp1 || temp2){
+    while(temp1 != NULL || temp2 != NULL){
         // This will add both coeff if both exist, if only one then only one is added to the coefficientSum
-        int coefficientSum = temp1->coefficient? (temp2->coefficient? temp1->coefficient + temp2->coefficient : temp1->coefficient ): temp2->coefficient;
+        int coefficientSum = temp1  != NULL ? (temp2 != NULL ? temp1->coefficient + temp2->coefficient : temp1->coefficient ): temp2->coefficient;
         addVar(head, coefficientSum);
-        temp1 = temp1->next;
-        temp2 = temp2->next;
+        temp1 = temp1 ? temp1->next: temp1;
+        temp2 = temp2 ? temp2->next: temp2;
     }
     return head -> next;
 }
@@ -51,7 +52,8 @@ int main(){
     // equestion 1
     node* eqn1 = createVar(1);
     addVar(eqn1, 2);
-    addVar(eqn1, 3);
+    addVar(eqn1, 7);
+    addVar(eqn1, 4);
     addVar(eqn1, 4);
     printEqn(eqn1);
     // equestion 1
