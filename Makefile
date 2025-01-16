@@ -9,8 +9,8 @@ TARGET = a
 all: $(TARGET)
 
 # Build rule
-$(TARGET): polynomial.c
-	$(CC) $(CFLAGS) -o $(TARGET) polynomial.c
+$(TARGET): testing.c
+	$(CC) $(CFLAGS) -o $(TARGET) testing.c
 
 # OS-specific commands
 ifeq ($(OS),Windows_NT)

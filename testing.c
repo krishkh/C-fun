@@ -78,17 +78,32 @@ int delete(node** head, int index){
     return -1;
 }
 
-int reversal(node** head){
-    node *top = *head;
+node* reversal(node** head){
+    node *cursor = *head;
     node *prev = NULL;
-    while (top != NULL){
-        node* temp = top -> next;
-        top -> next = prev;
-        prev = top;
-        top = temp;
+    while (cursor != NULL){
+        node* temp = cursor -> next;
+        cursor -> next = prev;
+        prev = cursor;
+        cursor = temp;
     }
-    *head = prev;
+    return prev;
+}
+
+int makeCircular(node* head){
+    node* temp = head;
+    while (temp -> next != NULL){
+        temp = temp -> next;
+    }
+    temp -> next = head;
     return 0;
+}
+
+int checkCircular(node* head){
+    node* temp = head;
+    node* reversedTemp = reversal(&temp);
+    printf("\nvalue -> %d\n",temp == reversedTemp);
+    return temp == reversedTemp;
 }
 
 int singlyLinkedList(){
@@ -106,8 +121,10 @@ int singlyLinkedList(){
     printArr(head);
     delete(&head,3);
     printArr(head);
-    reversal(&head);
-    printArr(head);
+    // makeCircular(head);
+    checkCircular(head);
+    // node* reverse = reversal(&head);
+    // printArr(reverse);
     return 0;
 }
 
