@@ -15,7 +15,7 @@ typedef struct stack{
 void printStk(stack* Stack){
     node* temp = Stack->head;
     while (temp != NULL){
-        printf("%d -> ", temp -> data);
+        printf("%c -> ", temp -> data);
         temp = temp -> next;
     }
     printf("NULL\n");
@@ -48,17 +48,20 @@ int pop(stack* Stack){
 int checkingStack(){
     printf("\n---Beginning of the Stack Program---\n");
     stack* Stack = createStack();
-    push(Stack, 1);
-    push(Stack, 2);
-    push(Stack, 3);
-    push(Stack, 4);
+    push(Stack, '1');
+    push(Stack, '2');
+    push(Stack, '3');
+    push(Stack, '4');
     printStk(Stack);
     printf("size: %d\n", Stack->size);
-    printf("popped: %d\n", pop(Stack));
+    printf("popped: %c\n", pop(Stack));
     printStk(Stack);
     return 0;
 }
 
 int main(){
     checkingStack();
+    // stack* operatorStack;
+    // stack* outputStack;
+    // char equation[] = "";
 }
