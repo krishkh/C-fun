@@ -9,8 +9,8 @@ TARGET = a
 all: $(TARGET)
 
 # Build rule
-$(TARGET): testing.c
-	$(CC) $(CFLAGS) -o $(TARGET) testing.c
+$(TARGET): stack.c
+	$(CC) $(CFLAGS) -o $(TARGET) stack.c
 
 # OS-specific commands
 ifeq ($(OS),Windows_NT)
