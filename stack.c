@@ -59,9 +59,26 @@ int checkingStack(){
     return 0;
 }
 
+char* postfixConversion(char * equation){
+    printf("%s", equation);
+
+    stack* operatorStack = createStack();
+    stack* outputStack = createStack();
+    char* cursor = equation;
+    while(cursor != '\0'){
+        if (cursor > 65 && cursor < 90 || cursor > 98 && cursor < 123){
+            push(outputStack);
+        }
+
+        if (operatorStack->head->data)
+        cursor++;
+    }
+
+    return equation;
+}
+
 int main(){
     checkingStack();
-    // stack* operatorStack;
-    // stack* outputStack;
-    // char equation[] = "";
+    char* equation = "A+B+C"; // AB+C+
+    postfixConversion(equation);
 }
