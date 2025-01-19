@@ -12,6 +12,22 @@ typedef struct stack{
     int size;
 }stack;
 
+void printStk(stack* Stack);
+stack* createStack();
+int push(stack* Stack, int item);
+int pop(stack* Stack);
+int getPriority(char element);
+int isOperator(char element);
+int isAlpha(char element);
+char* postfixConversion(char * equation);
+int checkingStack();
+
+int main(){
+    // checkingStack();
+    // char* equation = "A+B+C"; // AB+C+
+    // postfixConversion(equation);
+}
+
 void printStk(stack* Stack){
     node* temp = Stack->head;
     while (temp != NULL){
@@ -59,6 +75,41 @@ int checkingStack(){
     return 0;
 }
 
+int getPriority(char element){
+    switch(element){
+        case '+':
+        case '-':
+            return 1;
+        case '/':
+        case '*':
+            return 2;
+        case '^':
+            return 3;
+        default: 
+            return 0;
+    }
+}
+
+
+int isOperator(char element){
+    switch(element){
+        case '+':
+        case '-':
+        case '/':
+        case '*':
+        case '^':
+            return 1;
+        }
+    return 0;
+}
+
+int isAlpha(char element){
+    if ((element > 65 && element < 90) || (element > 98 && element < 123)){
+            return 1;
+        }
+    return 0;
+}
+
 char* postfixConversion(char * equation){
     printf("%s", equation);
 
@@ -66,19 +117,12 @@ char* postfixConversion(char * equation){
     stack* outputStack = createStack();
     char* cursor = equation;
     while(cursor != '\0'){
-        if (cursor > 65 && cursor < 90 || cursor > 98 && cursor < 123){
-            push(outputStack);
+        if (isAlpha(*cursor)){
+            push(outputStack, *cursor);
         }
-
-        if (operatorStack->head->data)
+        if (operatorStack->head->data){}
         cursor++;
     }
 
     return equation;
-}
-
-int main(){
-    checkingStack();
-    char* equation = "A+B+C"; // AB+C+
-    postfixConversion(equation);
 }
