@@ -118,19 +118,6 @@ int pop(stack* Stack){
     return temp;
 }
 
-int checkingStack(){
-    printf("\n---Beginning of the Stack Program---\n");
-    stack* Stack = createStack();
-    push(Stack, '1');
-    push(Stack, '2');
-    push(Stack, '3');
-    push(Stack, '4');
-    printStk(Stack);
-    printf("size: %d\n", Stack->size);
-    printf("popped: %c\n", pop(Stack));
-    printStk(Stack);
-    return 0;
-}
 
 int getPriority(char element){
     switch(element){
@@ -164,5 +151,19 @@ int isAlpha(char element){
     if ((element >= 65 && element <= 90) || (element >= 98 && element <= 123)){
             return 1;
         }
+    return 0;
+}
+
+int checkingStack(){
+    printf("\n---Beginning of the Stack Program---\n");
+    stack* Stack = createStack();
+    push(Stack, '1');
+    push(Stack, '2');
+    push(Stack, '3');
+    push(Stack, '4');
+    printStk(Stack);
+    printf("size: %d\n", Stack->size);
+    printf("popped: %c\n", pop(Stack));
+    printStk(Stack);
     return 0;
 }
