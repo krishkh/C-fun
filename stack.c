@@ -1,5 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
+#include <unistd.h>
+
+#define GREEN "\033[32m"
+#define RED "\033[31m"
+#define YELLOW "\033[33m"
+#define BLUE "\033[34m"
+#define RESET "\033[0m"
+#define clear() printf("\033[H\033[J")
 
 // Lets first implement a Stack
 typedef struct node{
@@ -24,14 +33,62 @@ int checkingStack();
 
 int main(){
     // checkingStack();
-    // char* equation = "A+B+C"; // AB+C+
-    // postfixConversion(equation);
+    char* equation = "A-(B+C)*A/D";
+    postfixConversion(equation);
 }
 
+char* postfixConversion(char * equation){
+    printf("%s\n", equation);
+
+    stack* operatorStack = createStack();
+    char result[100];
+    int resIndex = 0;
+    char* cursor = equation;
+    while(*cursor != '\0'){
+        if (isAlpha(*cursor)){
+            printf(YELLOW "Adding %c in result\n" RESET, *cursor);
+            result[resIndex++] = *cursor;
+        }
+        else if (*cursor == '(') {
+            printf(YELLOW "Adding ( in operator Stack\n" RESET);
+            push(operatorStack, *cursor);
+        }
+        else if (*cursor == ')') {
+            printf(RED "Encountered ), INITIATE POP\n" RESET);
+            while (operatorStack->head != NULL && operatorStack->head->data != '(') {
+                result[resIndex++] = pop(operatorStack);
+            }
+            pop(operatorStack); // Pop '(' from stack
+        }
+        else if (isOperator(*cursor)){
+            while (operatorStack->head != NULL && 
+                   getPriority(operatorStack->head->data) >= getPriority(*cursor)) {
+                result[resIndex++] = pop(operatorStack);
+            }
+            printf(YELLOW "Adding %c in operator Stack\n" RESET, *cursor);
+            push(operatorStack, *cursor);
+        }
+        printf(GREEN "Current Stack State: "RESET );
+        printStk(operatorStack);
+        printf(BLUE "Current Result State: "RESET );
+        printf("%s", result);
+        printf("\n");
+        cursor++;
+        sleep(2);
+        clear();
+    }
+    while (operatorStack->head != NULL) {
+        result[resIndex++] = pop(operatorStack);
+
+    }
+    result[resIndex] = '\0'; // Null-terminate the result
+    printf(GREEN "Postfix Expression: %s\n" RESET, result);
+    return strdup(result); // Return a copy of the result
+}
 void printStk(stack* Stack){
     node* temp = Stack->head;
     while (temp != NULL){
-        printf("%c -> ", temp -> data);
+        printf("%c, ", temp -> data);
         temp = temp -> next;
     }
     printf("NULL\n");
@@ -104,25 +161,8 @@ int isOperator(char element){
 }
 
 int isAlpha(char element){
-    if ((element > 65 && element < 90) || (element > 98 && element < 123)){
+    if ((element >= 65 && element <= 90) || (element >= 98 && element <= 123)){
             return 1;
         }
     return 0;
-}
-
-char* postfixConversion(char * equation){
-    printf("%s", equation);
-
-    stack* operatorStack = createStack();
-    stack* outputStack = createStack();
-    char* cursor = equation;
-    while(cursor != '\0'){
-        if (isAlpha(*cursor)){
-            push(outputStack, *cursor);
-        }
-        if (operatorStack->head->data){}
-        cursor++;
-    }
-
-    return equation;
 }
